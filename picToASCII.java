@@ -68,7 +68,6 @@ class Main {
         System.out.println("Please specify picture directory:");
         Scanner scn = new Scanner(System.in);
         String dir = scn.next();
-        scn.close();
         BufferedImage img = null;
         try {
             img = ImageIO.read(new File(dir));
@@ -87,11 +86,17 @@ class Main {
         }
         System.out.println("File read successfully!");
         
+        System.out.println("Image size:");
+        System.out.println("(1): Small");
+        System.out.println("(2): Medium");
+        System.out.println("(3): Large");
+        Scanner scnSize = new Scanner(System.in);
+        int size = scnSize.nextInt();
         File file = new File("results.txt");
         PrintStream stream = new PrintStream(file);
         System.out.print("Writing to file...");
-        for (int i = 0; i < height; i++) {
-            for (int j = 0; j < width; j++) {
+        for (int i = 0; i < height; i += 4-size) {
+            for (int j = 0; j < width; j+= 4-size) {
                 stream.print(findChar(picGray[i][j]));
             }
             if (i % 100 == 0)
@@ -100,6 +105,8 @@ class Main {
         }
         System.out.println("Picture successfully converted!");
         stream.close();
+        scn.close();
+        scnSize.close();
     }
 
     // Finds the character to be chosen, based on how dark the pixel is.
