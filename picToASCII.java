@@ -65,7 +65,7 @@ class Main {
     };
 
     public static void main(String[] args) throws FileNotFoundException {
-        System.out.println("Please specify picture directory:");
+        System.out.print("Please specify picture directory: ");
         Scanner scn = new Scanner(System.in);
         String dir = scn.next();
         BufferedImage img = null;
